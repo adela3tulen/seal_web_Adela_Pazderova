@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svět tuleňů - Kompletní atlas a biologie ploutvonožců</title>
+    
+    <meta name="description" content="Informační portál věnovaný biologii, anatomickým adaptacím a kompletnímu zoologickému přehledu všech 18 žijících druhů tuleňů.">
+    <meta name="keywords" content="tuleň, ploutvonožci, Phocidae, zoologický atlas, biologie moře, ochrana přírody, rypouš, čepcol">
+    <meta name="author" content="Student 2. ročníku">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Svět tuleňů - Kompletní atlas a biologie">
+    <meta property="og:description" content="Objevte fascinující svět tuleňů. Anatomie, pozoruhodné mechanismy přežití a kompletní přehled všech druhů.">
+    <meta property="og:image" content="tuleni/tulen-obecny.webp">
+    <meta property="og:url" content="https://tvojaname.github.io/svet-tulenu/">
+    <meta property="og:site_name" content="Svět tuleňů">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Svět tuleňů - Kompletní atlas">
+    <meta name="twitter:description" content="Informační portál věnovaný biologii a kompletnímu zoologickému přehledu tuleňů.">
+    <meta name="twitter:image" content="tuleni/tulen-obecny.webp">
+
+    <style>
+        :root {
+            --bg-start: #e0f2fe;
+            --bg-end: #ccfbf1;
+            --card-white: rgba(255, 255, 255, 0.95);
+            --nav-bg: #0f172a;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --text-main: #0f172a;
+            --text-muted: #334155;
+            --shadow: rgba(0, 50, 100, 0.06);
+        }
+
+        [data-theme="dark"] {
+            --bg-start: #0f172a;
+            --bg-end: #1e293b;
+            --card-white: rgba(30, 41, 59, 0.95);
+            --nav-bg: #020617;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-blue);
+            color: white;
+            padding: 8px;
+            z-index: 2000;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        nav {
+            background-color: var(--nav-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 15px 24px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        nav a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        nav a:hover, nav a:focus {
+            color: #0f172a;
+            background-color: var(--accent-cyan);
+            outline: none;
+        }
+
+        .theme-toggle {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .theme-toggle:hover { background: var(--accent-cyan); }
+
+        .hero {
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 40px;
+        }
+        .hero-emoji {
+            font-size: 6rem;
+            animation: floatAnimation 4s ease-in-out infinite;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin: 10px 0;
+            font-weight: 900;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .web-section {
+            background: var(--card-white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px var(--shadow);
+            margin-bottom: 40px;
+            scroll-margin-top: 100px; 
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .info-block {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .info-visual {
+            font-size: 5rem;
+            background: rgba(0,0,0,0.05);
+            padding: 20px;
+            border-radius: 50%;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        /* 2x2 Grid pro Zajímavosti */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .feature-item {
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .feat-1 { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-left: 6px solid #0284c7; color: #0f172a; }
+        .feat-2 { background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-left: 6px solid #db2777; color: #0f172a; }
+        .feat-3 { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border-left: 6px solid #9333ea; color: #0f172a; }
+        .feat-4 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-left: 6px solid #16a34a; color: #0f172a; }
+
+        /* Filtrování */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--accent-blue);
+            background: transparent;
+            color: var(--text-main);
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .group-title {
+            font-size: 1.6rem;
+            margin: 30px 0 15px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            color: white;
+        }
+        .group-north { background: #0891b2; }
+        .group-south { background: #1d4ed8; }
+        .group-warm  { background: #be123c; }
+
+        .grid-atlas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .atlas-card {
+            background: var(--card-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card-visual-img {
+            background: #f1f5f9;
+            height: 180px;
+            overflow: hidden;
+        }
+        .card-visual-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-body { padding: 20px; }
+        .card-body h3 { font-size: 1.25rem; margin-bottom: 4px; }
+        .card-body .latinsky { font-style: italic; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; }
+        .card-body p { font-size: 0.95rem; }
+
+        footer {
+            background-color: var(--nav-bg);
+            color: #94a3b8;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; gap: 15px; }
+            .info-block { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Přeskočit na obsah</a>
+
+    <nav aria-label="Hlavní navigace">
+        <div class="nav-container">
+            <ul>
+                <li><a href="#anatomie">Anatomie</a></li>
+                <li><a href="#zajimavosti">Zajímavosti</a></li>
+                <li><a href="#atlas">Atlas</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeBtn" aria-label="Přepnout tmavý režim">Tmavý režim</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-emoji" aria-hidden="true">🦭</div>
+        <h1>Svět tuleňů online</h1>
+        <p>Kompletní vědecký portál splňující standardy moderního, rychlého a přístupného webu.</p>
+    </header>
+
+    <main class="container" id="main-content">
+        
+        <section id="anatomie" class="web-section" aria-labelledby="title-anatomy">
+            <h2 id="title-anatomy" class="section-title">Anatomie a přizpůsobení</h2>
+            <div class="info-block">
+                <div class="info-visual" aria-hidden="true">🌊</div>
+                <div class="info-text">
+                    <p>Tuleni (Phocidae) jsou savci dokonale přizpůsobení životu ve vodním prostředí. Jejich aerodynamické tělo vřetenovitého tvaru minimalizuje odpor vody při plavání a potápění. Od lachtanovitých se liší několika zásadními znaky: nemají žádné vnější ušní boltce a jejich zadní ploutve neustále směřují dozadu.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="zajimavosti" class="web-section" aria-labelledby="title-facts">
+            <h2 id="title-facts" class="section-title">Pozoruhodné mechanismy přežití</h2>
+            <div class="features-grid">
+                <div class="feature-item feat-1">
+                    <h3>Fyziologie ponoru</h3>
+                    <p>Při potápění dokáží tuleni reflexivně snížit svou srdeční frekvenci na pouhých 10 % běžného stavu.</p>
+                </div>
+                <div class="feature-item feat-2">
+                    <h3>Citlivé vibrisy</h3>
+                    <p>Hmatové vousy na čumáku zachytí hydrodynamické stopy plovoucí ryby i v naprosté tmě hlubokého oceánu.</p>
+                </div>
+                <div class="feature-item feat-3">
+                    <h3>Izolace tukem</h3>
+                    <p>Před mrazem je chrání vrstva podkožního tuku (tran), která dosahuje tloušťky až 10 cm.</p>
+                </div>
+                <div class="feature-item feat-4">
+                    <h3>Spánek pod vodou</h3>
+                    <p>Tuleni dokáží spát pod vodou. Tělo automaticky vyplave pro nádech, aniž by se tuleň zcela probudil.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="atlas" class="web-section" aria-labelledby="title-atlas">
+            <h2 id="title-atlas" class="section-title">Kompletní zoologický atlas</h2>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Všechny druhy (18)</button>
+                <button class="filter-btn" data-filter="north">Arktické a severské (8)</button>
+                <button class="filter-btn" data-filter="south">Antarktické a jižní (6)</button>
+                <button class="filter-btn" data-filter="warm">Tropické a vnitřní (4)</button>
+            </div>
+
+            <div class="atlas-wrapper">
+                
+                <div class="atlas-group" data-category="north">
+                    <div class="group-title group-north">Arktické a severské druhy</div>
+                    <div class="grid-atlas">
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-obecny.webp" alt="Tuleň obecný" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň obecný</h3>
+                                <p class="latinsky">Phoca vitulina</p>
+                                <p>Nejrozšířenější druh severní polokoule. Má typicky jemně skvrnitou kůži.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-gronsky.jpg" alt="Tuleň grónský" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň grónský</h3>
+                                <p class="latinsky">Pagophilus groenlandicus</p>
+                                <p>Obyvatel ledových plání. Známý sněhově bílým kožichem svých mláďat.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-krouzkovany.webp" alt="Tuleň kroužkovaný" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň kroužkovaný</h3>
+                                <p class="latinsky">Pusa hispida</p>
+                                <p>Nejmenší arktický druh, který si v ledu vyhrabává dýchací otvory.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-vousaty.jpg" alt="Tuleň vousatý" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň vousatý</h3>
+                                <p class="latinsky">Erignathus barbatus</p>
+                                <p>Robustní tuleň s nápadně hustým vousem, kterým mapuje mořské dno.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-kuzelozubi.jpg" alt="Tuleň kuželozubý" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň kuželozubý</h3>
+                                <p class="latinsky">Halichoerus grypus</p>
+                                <p>Velký druh s charakteristicky protáhlým, špičatým profilem hlavy.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/paskovany.jpg" alt="Tuleň páskovaný" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň páskovaný</h3>
+                                <p class="latinsky">Histriophoca fasciata</p>
+                                <p>Vzácný a kontrastní druh s širokými bílými pruhy na tmavém těle.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/rypous-sloni.jpg" alt="Čepcol hřebenatý" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Čepcol hřebenatý</h3>
+                                <p class="latinsky">Cystophora cristata</p>
+                                <p>Samci mají nafukovací kožený vak na hlavě a červenou nosní blánu.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-pacificky.jpg" alt="Tuleň pacifický" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň pacifický</h3>
+                                <p class="latinsky">Phoca largha</p>
+                                <p>Žije v severním Tichomoří, hnízdí a odpočívá výhradně na plovoucím ledu.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="atlas-group" data-category="south">
+                    <div class="group-title group-south">Antarktické a jižní druhy</div>
+                    <div class="grid-atlas">
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/rypous-sloni.webp" alt="Rypouš sloní jižní" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Rypouš sloní jižní</h3>
+                                <p class="latinsky">Mirounga leonina</p>
+                                <p>Největší ploutvonožec planety. Samci mají chobot a váží až 4 000 kg.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/rypous-sloni.webp" alt="Rypouš sloní severní" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Rypouš sloní severní</h3>
+                                <p class="latinsky">Mirounga angustirostris</p>
+                                <p>Bratranec jižního rypouše, obývající pacifické pobřeží Severní Ameriky.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-leopardi.jpeg" alt="Tuleň leopardí" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň leopardí</h3>
+                                <p class="latinsky">Hydrurga leptonyx</p>
+                                <p>Obávaný antarktický predátor s mohutnými zuby. Aktivně loví tučňáky.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-krabozravy.jpg" alt="Tuleň krabožravý" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň krabožravý</h3>
+                                <p class="latinsky">Lobodon carcinophaga</p>
+                                <p>Nejpočetnější tuleň světa. Speciálními zuby filtruje z vody drobný kril.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-weddelluv.jpg" alt="Tuleň Weddellův" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň Weddellův</h3>
+                                <p class="latinsky">Leptonychotes weddellii</p>
+                                <p>Obyvatel extrémního jihu. Dokáže se potopit do hloubek přes 600 metrů.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-rossuv.jpg" alt="Tuleň Rossův" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň Rossův</h3>
+                                <p class="latinsky">Ommatophoca rossii</p>
+                                <p>Tajuplný, málo prozkoumaný antarktický samotář s obrovskýma očima.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="atlas-group" data-category="warm">
+                    <div class="group-title group-warm">Vnitrozemské a tropické druhy</div>
+                    <div class="grid-atlas">
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-bajkalsky.webp" alt="Tuleň bajkalský" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň bajkalský</h3>
+                                <p class="latinsky">Pusa sibirica</p>
+                                <p>Jediný výhradně sladkovodní druh na světě, endemit sibiřského jezera Bajkal.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-kaspicky.jpg" alt="Tuleň kaspický" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň kaspický</h3>
+                                <p class="latinsky">Pusa caspica</p>
+                                <p>Žije pouze v izolovaném Kaspickém moři a patří mezi ohrožené druhy.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-stredomorsky.webp" alt="Tuleň středomořský" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň středomořský</h3>
+                                <p class="latinsky">Monachus monachus</p>
+                                <p>Kriticky ohrožený tropický druh. Vyhledává teplá moře a úkryty v jeskyních.</p>
+                            </div>
+                        </article>
+                        <article class="atlas-card">
+                            <div class="card-visual-img"><img src="tuleni/tulen-havajsky.jpg" alt="Tuleň havajský" loading="lazy" width="300" height="180"></div>
+                            <div class="card-body">
+                                <h3>Tuleň havajský</h3>
+                                <p class="latinsky">Neomonachus schauinslandi</p>
+                                <p>Vzácný obyvatel teplých korálových pláží kolem Havajských ostrovů.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; text-align: center; margin-top: 25px;">
+                *Poznámka: Devatenáctý historický druh, tuleň karibský (Monachus tropicalis), byl v druhé polovině 20. století oficiálně prohlášen za vyhynulého a v moderní fauně již nefiguruje.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ročníková práce z Webových technologií. Kompletní zoologický přehled.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tmavý/Světlý režim
+            const themeBtn = document.getElementById('themeBtn');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = 'Světelný režim';
+            }
+
+            themeBtn.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme');
+                if (theme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeBtn.textContent = 'Tmavý režim';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeBtn.textContent = 'Světelný režim';
+                }
+            });
+
+            // Interaktivní filtrování bez frameworků
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const groups = document.querySelectorAll('.atlas-group');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    groups.forEach(group => {
+                        if (filterValue === 'all' || group.getAttribute('data-category') === filterValue) {
+                            group.style.display = 'block';
+                        } else {
+                            group.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
