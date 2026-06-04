@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svět tuleňů - Kompletní atlas a biologie ploutvonožců</title>
     
-    <meta name="description" content="Informační portál věnovaný biologii, anatomickým adaptacím a kompletnímu zoologickému přehledu všech 18 žijících druhů tuleňů.">
+    <meta name="description" content="Informační portál věnovaný biologii, anatomickým adaptacím a kompletnímu zoologickému přehledu tuleňů.">
     <meta name="keywords" content="tuleň, ploutvonožci, Phocidae, zoologický atlas, biologie moře, ochrana přírody, rypouš, čepcol">
     <meta name="author" content="Student 2. ročníku">
     <meta name="robots" content="index, follow">
@@ -82,7 +82,7 @@
             width: 100%;
             top: 0;
             left: 0;
-            padding: 15px 24px;
+            padding: 15px 40px; /* Zvětšený vnitřní boční prostor */
             box-shadow: 0 4px 25px rgba(0,0,0,0.15);
             z-index: 1000;
         }
@@ -90,7 +90,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            width: 100%; /* Roztažení na celou šířku */
             margin: 0 auto;
         }
         nav ul {
@@ -131,7 +131,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 140px 20px 40px;
+            padding: 140px 40px 40px;
         }
         .hero-emoji {
             font-size: 6rem;
@@ -149,9 +149,10 @@
         }
 
         .container {
-            max-width: 1200px;
+            width: 100%; /* Zajišťuje plnou šířku bez bočních mezer na monitoru */
+            max-width: 100%; /* Zrušeno fixní omezení na 1200px */
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 40px; /* Příjemný vnitřní okraj, aby text nelepil na obrazovku */
         }
 
         .web-section {
@@ -161,6 +162,7 @@
             box-shadow: 0 20px 40px var(--shadow);
             margin-bottom: 40px;
             scroll-margin-top: 100px; 
+            width: 100%; /* Roztažení boxů do krajů */
         }
 
         .section-title {
@@ -274,6 +276,8 @@
             .features-grid { grid-template-columns: 1fr; }
             .nav-container { flex-direction: column; gap: 15px; }
             .info-block { flex-direction: column; text-align: center; }
+            .container { padding: 20px 15px; }
+            .hero { padding: 140px 15px 40px; }
         }
     </style>
 </head>
@@ -336,9 +340,9 @@
             <h2 id="title-atlas" class="section-title">Kompletní zoologický atlas</h2>
 
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Všechny druhy (18)</button>
+                <button class="filter-btn active" data-filter="all">Všechny druhy</button>
                 <button class="filter-btn" data-filter="north">Arktické a severské (8)</button>
-                <button class="filter-btn" data-filter="south">Antarktické a jižní (6)</button>
+                <button class="filter-btn" data-filter="south">Antarktické a jižní (5)</button>
                 <button class="filter-btn" data-filter="warm">Tropické a vnitřní (4)</button>
             </div>
 
@@ -366,7 +370,7 @@
                         <article class="atlas-card">
                             <div class="card-visual-img"><img src="tuleni/tulen-krouzkovany.webp" alt="Tuleň kroužkovaný" loading="lazy" width="300" height="180"></div>
                             <div class="card-body">
-                                <h3>Tuleň kroužkovaný</h3>
+                                <h3>Tuleň kroužkovany</h3>
                                 <p class="latinsky">Pusa hispida</p>
                                 <p>Nejmenší arktický druh, který si v ledu vyhrabává dýchací otvory.</p>
                             </div>
@@ -418,19 +422,11 @@
                     <div class="group-title group-south">Antarktické a jižní druhy</div>
                     <div class="grid-atlas">
                         <article class="atlas-card">
-                            <div class="card-visual-img"><img src="tuleni/rypous-sloni.webp" alt="Rypouš sloní jižní" loading="lazy" width="300" height="180"></div>
+                            <div class="card-visual-img"><img src="tuleni/rypous-sloni.webp" alt="Rypouš sloní" loading="lazy" width="300" height="180"></div>
                             <div class="card-body">
-                                <h3>Rypouš sloní jižní</h3>
+                                <h3>Rypouš sloní</h3>
                                 <p class="latinsky">Mirounga leonina</p>
                                 <p>Největší ploutvonožec planety. Samci mají chobot a váží až 4 000 kg.</p>
-                            </div>
-                        </article>
-                        <article class="atlas-card">
-                            <div class="card-visual-img"><img src="tuleni/rypous-sloni.webp" alt="Rypouš sloní severní" loading="lazy" width="300" height="180"></div>
-                            <div class="card-body">
-                                <h3>Rypouš sloní severní</h3>
-                                <p class="latinsky">Mirounga angustirostris</p>
-                                <p>Bratranec jižního rypouše, obývající pacifické pobřeží Severní Ameriky.</p>
                             </div>
                         </article>
                         <article class="atlas-card">
