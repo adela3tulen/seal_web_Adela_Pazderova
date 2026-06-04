@@ -17,11 +17,6 @@
     <meta property="og:url" content="https://tvojaname.github.io/svet-tulenu/">
     <meta property="og:site_name" content="Svět tuleňů">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Svět tuleňů - Kompletní atlas">
-    <meta name="twitter:description" content="Informační portál věnovaný biologii a kompletnímu zoologickému přehledu tuleňů.">
-    <meta name="twitter:image" content="tuleni/tulen-obecny.webp">
-
     <style>
         :root {
             --bg-start: #e0f2fe;
@@ -82,7 +77,7 @@
             width: 100%;
             top: 0;
             left: 0;
-            padding: 15px 40px; /* Zvětšený vnitřní boční prostor */
+            padding: 15px 24px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.15);
             z-index: 1000;
         }
@@ -90,8 +85,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%; /* Roztažení na celou šířku */
+            max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
         nav ul {
             display: flex;
@@ -131,7 +127,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 140px 40px 40px;
+            padding: 140px 20px 40px;
         }
         .hero-emoji {
             font-size: 6rem;
@@ -149,52 +145,67 @@
         }
 
         .container {
-            width: 100%; /* Zajišťuje plnou šířku bez bočních mezer na monitoru */
-            max-width: 100%; /* Zrušeno fixní omezení na 1200px */
+            max-width: 1240px; /* Ideální velikost, aby kód držel tvar z VS Codu */
             margin: 0 auto;
-            padding: 20px 40px; /* Příjemný vnitřní okraj, aby text nelepil na obrazovku */
+            padding: 20px;
+            width: 100%;
         }
 
         .web-section {
             background: var(--card-white);
             border-radius: 24px;
-            padding: 40px;
+            padding: 50px 60px; /* Zvětšené vnitřní okraje pro luxusní prostorný vzhled */
             box-shadow: 0 20px 40px var(--shadow);
             margin-bottom: 40px;
             scroll-margin-top: 100px; 
-            width: 100%; /* Roztažení boxů do krajů */
+            width: 100%;
         }
 
         .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
+            font-size: 2.5rem; /* Větší a čistší nadpis sekce */
+            margin-bottom: 35px;
             text-align: center;
+            font-weight: 800;
         }
 
         .info-block {
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 50px; /* Zachování perfektní mezery mezi ikonou a textem */
         }
         .info-visual {
-            font-size: 5rem;
-            background: rgba(0,0,0,0.05);
-            padding: 20px;
+            font-size: 6rem; /* Velká ikona, jak má být */
+            background: rgba(0,0,0,0.04);
+            padding: 25px;
             border-radius: 50%;
-            min-width: 120px;
-            text-align: center;
+            min-width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .info-text p {
+            font-size: 1.2rem; /* Větší písmo pro text anatomie */
+            line-height: 1.8;
         }
 
         /* 2x2 Grid pro Zajímavosti */
         .features-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 30px;
         }
         .feature-item {
-            padding: 30px;
-            border-radius: 18px;
+            padding: 35px;
+            border-radius: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .feature-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .feature-item p {
+            font-size: 1.05rem;
         }
         .feat-1 { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-left: 6px solid #0284c7; color: #0f172a; }
         .feat-2 { background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-left: 6px solid #db2777; color: #0f172a; }
@@ -206,17 +217,18 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             flex-wrap: wrap;
         }
         .filter-btn {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: 2px solid var(--accent-blue);
             background: transparent;
             color: var(--text-main);
             font-weight: 700;
             border-radius: 30px;
             cursor: pointer;
+            font-size: 1rem;
         }
         .filter-btn.active, .filter-btn:hover {
             background: var(--accent-blue);
@@ -224,11 +236,12 @@
         }
 
         .group-title {
-            font-size: 1.6rem;
-            margin: 30px 0 15px;
-            padding: 8px 15px;
-            border-radius: 8px;
+            font-size: 1.7rem;
+            margin: 35px 0 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
             color: white;
+            font-weight: 700;
         }
         .group-north { background: #0891b2; }
         .group-south { background: #1d4ed8; }
@@ -237,20 +250,20 @@
         .grid-atlas {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            gap: 30px;
+            margin-bottom: 35px;
         }
         .atlas-card {
             background: var(--card-white);
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 4px 15px var(--shadow);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 6px 20px var(--shadow);
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .card-visual-img {
             background: #f1f5f9;
-            height: 180px;
+            height: 200px;
             overflow: hidden;
         }
         .card-visual-img img {
@@ -259,25 +272,30 @@
             object-fit: cover;
         }
 
-        .card-body { padding: 20px; }
-        .card-body h3 { font-size: 1.25rem; margin-bottom: 4px; }
-        .card-body .latinsky { font-style: italic; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; }
-        .card-body p { font-size: 0.95rem; }
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 1.35rem; margin-bottom: 6px; }
+        .card-body .latinsky { font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; }
+        .card-body p { font-size: 1rem; }
 
         footer {
             background-color: var(--nav-bg);
             color: #94a3b8;
             text-align: center;
-            padding: 30px;
-            margin-top: 40px;
+            padding: 35px;
+            margin-top: 50px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 992px) {
+            .web-section { padding: 40px 30px; }
+            .info-block { gap: 30px; }
         }
 
         @media (max-width: 768px) {
             .features-grid { grid-template-columns: 1fr; }
             .nav-container { flex-direction: column; gap: 15px; }
             .info-block { flex-direction: column; text-align: center; }
-            .container { padding: 20px 15px; }
-            .hero { padding: 140px 15px 40px; }
+            .info-text p { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -323,7 +341,7 @@
                 </div>
                 <div class="feature-item feat-2">
                     <h3>Citlivé vibrisy</h3>
-                    <p>Hmatové vousy na čumáku zachytí hydrodynamické stopy plovoucí ryby i v naprosté tmě hlubokého oceánu.</p>
+                    <p>Hmatové vousy na čumáku zachytí hydrodynamické stopo plovoucí ryby i v naprosté tmě hlubokého oceánu.</p>
                 </div>
                 <div class="feature-item feat-3">
                     <h3>Izolace tukem</h3>
@@ -370,7 +388,7 @@
                         <article class="atlas-card">
                             <div class="card-visual-img"><img src="tuleni/tulen-krouzkovany.webp" alt="Tuleň kroužkovaný" loading="lazy" width="300" height="180"></div>
                             <div class="card-body">
-                                <h3>Tuleň kroužkovany</h3>
+                                <h3>Tuleň kroužkovaný</h3>
                                 <p class="latinsky">Pusa hispida</p>
                                 <p>Nejmenší arktický druh, který si v ledu vyhrabává dýchací otvory.</p>
                             </div>
@@ -538,7 +556,7 @@
                 }
             });
 
-            // Interaktivní filtrování bez frameworků
+            // Interaktivní filtrování
             const filterButtons = document.querySelectorAll('.filter-btn');
             const groups = document.querySelectorAll('.atlas-group');
 
