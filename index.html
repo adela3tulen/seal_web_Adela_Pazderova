@@ -9,6 +9,7 @@
     <meta name="keywords" content="tuleň, ploutvonožci, Phocidae, zoologický atlas, biologie moře, ochrana přírody, rypouš, čepcol">
     <meta name="author" content="Student 2. ročníku">
     <meta name="robots" content="index, follow">
+    <meta name="robots" content="max-image-preview:large">
 
     <style>
         :root {
@@ -310,7 +311,7 @@
                 <li><a href="#zajimavosti">Zajímavosti</a></li>
                 <li><a href="#atlas">Atlas</a></li>
             </ul>
-            <button class="theme-toggle" id="themeBtn" aria-label="Přepnout tmavý režim">Tmavý režim</button>
+            <button class="theme-toggle" id="themeBtn" aria-label="Přepnout Světlý režim">Světlý režim</button>
         </div>
     </nav>
 
@@ -535,7 +536,7 @@
             
             if (currentTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                themeBtn.textContent = 'Světelný režim';
+                themeBtn.textContent = 'Tmavý režim';
             }
 
             themeBtn.addEventListener('click', () => {
@@ -543,11 +544,11 @@
                 if (theme === 'dark') {
                     document.documentElement.removeAttribute('data-theme');
                     localStorage.setItem('theme', 'light');
-                    themeBtn.textContent = 'Tmavý režim';
+                    themeBtn.textContent = 'Světlý režim';
                 } else {
                     document.documentElement.setAttribute('data-theme', 'dark');
                     localStorage.setItem('theme', 'dark');
-                    themeBtn.textContent = 'Světelný režim';
+                    themeBtn.textContent = 'Tmavý režim';
                 }
             });
 
