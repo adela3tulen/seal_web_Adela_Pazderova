@@ -41,3 +41,80 @@ seal_web_Adela_Pazderova/
     ├── tulen-kaspicky.jpg
     ├── tulen-stredomorsky.webp
     └── tulen-havajsky.jpg
+```
+### 1. Výkon (Performance)
+Teoretický popis řešení: Optimalizace výkonu na straně klienta spočívá v redukci přenášených dat a efektivním plánování síťových požadavků. Pro snížení hodnot LCP (Largest Contentful Paint) a CLS (Cumulative Layout Shift) využíváme moderní úsporné formáty obrázků (.webp), nativní odložené načítání (Lazy Loading) a striktní definici rozměrů přímo v HTML kódu.
+
+Výstřižek kódu:
+
+```HTML
+<div class="card-visual-img">
+    <img src="tuleni/tulen-obecny.webp" alt="Tuleň obecný na pláži" loading="lazy" width="320" height="220">
+</div>
+```
+Vysvětlení: Atribut loading="lazy" zajišťuje, že prohlížeč stahuje obrázek až ve chvíli, kdy se k němu uživatel při posouvání stránky přiblíží. Atributy width="320" a height="220" definují přesný poměr stran. Prohlížeč tak pro fotku rezervuje místo předem a text po načtení obrázku "neodskočí" dolů.
+
+### 2. SEO
+* **Teoretický popis řešení:** Moderní vyhledávače hodnotí weby na základě sémantické čistoty kódu a přítomnosti strukturovaných dat. Namísto generických divů jsou použity specifické HTML5 značky. Pro vyhledávací roboty jsou navíc implementována strukturovaná data ve formátu JSON-LD (Schema.org), která umožňují zařadit web do bohatých výsledků vyhledávání (*Rich Snippets*).
+* **Výstřižek kódu:**
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Svět tuleňů",
+  "url": "https://adela3tulen.github.io/seal_web_Adela_Pazderova/"
+}
+</script>
+```
+### 3. Přístupnost
+Teoretický popis řešení: Web musí být plně přístupný a ovladatelný pro lidi se zrakovým či motorickým znevýhodněním, kteří používají hlasové čtečky obrazovky nebo se po webu pohybují výhradně pomocí klávesnice. Standardy WCAG 2.1 vyžadují jasně deklarované stavy interaktivních prvků (ARIA atributy) a možnost přeskočit dlouhá menu.
+
+Výstřižek kódu:
+
+```HTML
+<a href="#main-content" class="skip-link">Přeskočit na obsah</a>
+
+<button class="filter-btn active" data-filter="all" aria-pressed="true">Všechny druhy</button>
+```
+Vysvětlení: Odkaz s třídou .skip-link je pro běžného uživatele skrytý, ale uživatel s klávesnicí (stisknutím klávesy Tab) ho uvidí jako první prvek a může přeskočit celé navigační menu. Atribut aria-pressed="true" u tlačítek předává čtečce informaci o tom, který filtr je aktuálně zapnutý.
+
+### 4. Sociální sítě (Social Snippets)
+Teoretický popis řešení: Při sdílení odkazu na sociálních sítích platformy vyhledávají specifické metaznačky v záhlaví webu. Tyto protokoly promění prostý textový odkaz na vizuálně atraktivní náhledovou kartu s obrázkem a popiskem. K tomuto účelu slouží Open Graph protokol a specifikace X Cards.
+
+Výstřižek kódu:
+
+```HTML
+<meta property="og:type" content="website">
+<meta property="og:title" content="Svět tuleňů - Kompletní atlas a biologie">
+<meta property="og:image" content="tuleni/tulen-obecny.webp">
+<meta name="twitter:card" content="summary_large_image">
+```
+Vysvětlení: Značky og:title a og:image určují přesný nadpis a hlavní obrázek, který se automaticky vykreslí v příspěvku na Facebooku nebo LinkedInu. Pravidlo twitter:card s hodnotou summary_large_image vygeneruje na síti X moderní zobrazení s velkým obrázkem.
+
+### 5. UI/UX a Responzivní design
+Teoretický popis řešení: Správná vizuální hierarchie vyžaduje, aby se web přizpůsobil velikosti displeje. Na úzkých obrazovkách mobilních telefonů způsobuje fixní velikost písma a velké okraje vertikální deformaci a přetékání obrázků. Řešením je responzivní typografie postavená na změně velikosti kořenového písma (html) za použití relativních jednotek rem v kombinaci s flexibilním gridem.
+
+Výstřižek kódu:
+
+```CSS
+@media (max-width: 768px) {
+    html { font-size: 14px; }
+    .grid-atlas { grid-template-columns: 1fr; }
+    .card-visual-img img {
+        width: 100% !important;
+        max-width: 100%;
+    }
+}
+```
+Vysvětlení: Uvnitř Media Query pro mobily jsme snížili základní font na 14px, čímž se automaticky zmenšily texty definované v rem. Grid se přeskládal do jednoho sloupce (1fr), takže karty mají přirozenou výšku. Pravidlo width: 100% !important striktně drží obrázky uvnitř bílého pozadí karet a zabraňuje jejich přetékání do stran.
+
+### 6. AI Integrace
+Teoretický popis řešení: Vývoj moderních webových rozhraní efektivně využívá umělou inteligenci jako partnera pro refaktorizaci kódu, generování sémantických textů na základě reálných biologických dat a pro odhalování skrytých chyb v responzivitě (tzv. layout overflow).
+
+Ukázka promptu z vývoje:
+
+„Obrázky v mé gridové struktuře atlasu na mobilu přetékají mimo bílé pozadí karet a texty se vertikálně natahují do dlouhých nudlí. Navrhni čisté řešení pomocí CSS proměnných, jednotek rem a object-fit pro reset mobilního zobrazení.“
+
+Vysvětlení: Integrace AI spočívala v aktivním code-review. Na základě výše uvedeného promptu umělá inteligence odhalila nevhodné chování pevných šířek na mobilních zařízeních a vygenerovala čistý responzivní CSS kód, který sjednotil vzhled celého webu bez nutnosti nasazování těžkých JavaScriptových knihoven.
