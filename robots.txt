@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adela3tulen.github.io/seal_web_Adela_Pazderova/sitemap.xml
