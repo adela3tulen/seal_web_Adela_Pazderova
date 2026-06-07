@@ -65,7 +65,7 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 18px; /* Globální zvětšení pro masivnější UI vzhled */
+            font-size: 18px; /* Globální zvětšení pro masivnější UI vzhled na PC */
         }
 
         body {
@@ -309,16 +309,57 @@
             font-size: 1.1rem;
         }
 
+        /* Tabletová responzivita */
         @media (max-width: 992px) {
             .web-section { padding: 45px 35px; }
             .info-block { gap: 35px; }
         }
 
+        /* Mobilní responzivita (Oprava protaženého/goofy vzhledu) */
         @media (max-width: 768px) {
-            html { font-size: 16px; }
-            .features-grid { grid-template-columns: 1fr; }
-            .nav-container { flex-direction: column; gap: 15px; }
-            .info-block { flex-direction: column; text-align: center; }
+            html { 
+                font-size: 15px; /* Jemné zmenšení písma, aby text na mobilu netvořil nudle */
+            }
+            .hero h1 {
+                font-size: 2.5rem; 
+            }
+            .hero-emoji {
+                font-size: 5rem;
+            }
+            .section-title {
+                font-size: 2rem; 
+                margin-bottom: 25px;
+            }
+            .web-section { 
+                padding: 30px 20px; /* Zmenšení prázdného místa v rámečcích na mobilu */
+                margin-bottom: 30px;
+                border-radius: 20px;
+            }
+            .features-grid { 
+                grid-template-columns: 1fr; /* Kartičky jdou čistě pod sebe */
+                gap: 20px;
+            }
+            .feature-item {
+                padding: 25px; /* Kompaktnější polstrování zajímavostí */
+            }
+            .info-block { 
+                flex-direction: column; 
+                text-align: center; 
+                gap: 20px;
+            }
+            .info-visual {
+                min-width: 120px;
+                height: 120px;
+                font-size: 5rem;
+            }
+            .nav-container { 
+                flex-direction: column; 
+                gap: 15px; 
+            }
+            nav a {
+                padding: 8px 12px;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
