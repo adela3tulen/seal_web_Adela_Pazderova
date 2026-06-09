@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
+<!DOCTYPE html><html lang="cs"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svět tuleňů - Kompletní atlas a biologie ploutvonožců</title>
@@ -37,30 +35,84 @@
         :root {
             --bg-start: #e0f2fe;
             --bg-end: #ccfbf1;
-            --card-white: rgba(255, 255, 255, 0.95);
-            --nav-bg: #0f172a;
+            
+            /* UPRAVENO: Pozadí sekce je jemně šedomodré, aby bílé kartičky vynikly */
+            --card-white: #f1f5f9; 
+            
+            --nav-bg: #004491;
             --accent-cyan: #06b6d4;
             --accent-blue: #3b82f6;
             --text-main: #0f172a;
-            --text-muted: #334155;
-            --shadow: rgba(0, 50, 100, 0.06);
+            --text-muted: #475569;
+            
+            /* UPRAVENO: Kartičky v atlasu jsou nyní čistě bílé, aby vystoupily z pozadí */
+            --card-bg: #ffffff;         
+            --species-title: #0369a1;   /* Jednotná sytě modrá barva nadpisů druhů */
+            
+            /* Světlý stín pro světlý režim */
+            --shadow: rgba(14, 165, 233, 0.15);
+            --feature-shadow: rgba(0, 0, 0, 0.05);
+
+            /* Barvy pro kartičky v zajímavostech - SVĚTLÝ REŽIM */
+            --feature-bg: #abd2ff;
+            --feature-text: #1e293b;
+            --feature-title: #581c87;
+
+            /* Barvy tlačítka pro světlý režim */
+            --toggle-btn-bg: var(--accent-blue);
+            --toggle-btn-hover: var(--accent-cyan);
+            --toggle-btn-text: #ffffff;
+            --toggle-btn-border: transparent;
+
+            /* Dynamické barvy pozadí a textu pro nadpisy sekcí */
+            --group-north-bg: #0891b2;
+            --group-south-bg: #1d4ed8;
+            --group-warm-bg: #e11d48;  
+            --group-title-text: #ffffff;
         }
 
         [data-theme="dark"] {
-            --bg-start: #0f172a;
-            --bg-end: #1e293b;
-            --card-white: rgba(30, 41, 59, 0.95);
+            --bg-start: #141c2e;
+            --bg-end: #001942;
+            
+            /* Pozadí sekce v tmavém režimu */
+            --card-white: #1e293b;
+            
             --nav-bg: #020617;
             --text-main: #f8fafc;
-            --text-muted: #cbd5e1;
-            --shadow: rgba(0, 0, 0, 0.3);
+            --text-muted: #e2e8f0;
+            
+            /* UPRAVENO: Pozadí kartiček je v tmavém režimu světlejší šedomodré (břidlicové) než pozadí sekce */
+            --card-bg: #2d3748;         
+            --species-title: #22d3ee;   /* Jednotná zářivá tyrkysová barva nadpisů druhů */
+            
+            /* Skutečně tmavý stín pro tmavý režim */
+            --shadow: rgba(0, 0, 0, 0.7);
+            --feature-shadow: rgba(0, 0, 0, 0.4);
+
+            /* Barvy pro kartičky v zajímavostech - TMAVÝ REŽIM */
+            --feature-bg: #00335f;
+            --feature-text: #f3e8ff;
+            --feature-title: #ffffff;
+
+            /* Barvy tlačítka pro tmavý režim */
+            --toggle-btn-bg: #2d3748;
+            --toggle-btn-hover: #4a5568;
+            --toggle-btn-text: #f8fafc;
+            --toggle-btn-border: 1px solid #4a5568;
+
+            /* Dynamické barvy pozadí a textu pro nadpisy sekcí */
+            --group-north-bg: #155e75;
+            --group-south-bg: #1e40af;
+            --group-warm-bg: #881337;   
+            --group-title-text: #f1f5f9;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         html {
@@ -76,18 +128,6 @@
             line-height: 1.7;
         }
 
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-blue);
-            color: white;
-            padding: 8px;
-            z-index: 2000;
-            transition: top 0.2s;
-        }
-        .skip-link:focus { top: 0; }
-
         nav {
             background-color: var(--nav-bg);
             position: fixed;
@@ -95,7 +135,7 @@
             top: 0;
             left: 0;
             padding: 20px 40px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
         .nav-container {
@@ -127,16 +167,21 @@
         }
 
         .theme-toggle {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
+            background: var(--toggle-btn-bg);
+            color: var(--toggle-btn-text);
+            border: var(--toggle-btn-border);
             padding: 10px 22px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
             font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .theme-toggle:hover { background: var(--accent-cyan); }
+        .theme-toggle:hover { 
+            background: var(--toggle-btn-hover); 
+        }
 
         .hero {
             min-height: 45vh;
@@ -220,19 +265,19 @@
         .feature-item {
             padding: 45px;
             border-radius: 24px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.02);
+            box-shadow: 0 10px 25px var(--feature-shadow);
+            background: var(--feature-bg); 
+            color: var(--feature-text);
+            border-left: none;
         }
         .feature-item h3 {
             font-size: 1.65rem;
             margin-bottom: 12px;
+            color: var(--feature-title);
         }
         .feature-item p {
             font-size: 1.2rem;
         }
-        .feat-1 { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-left: 8px solid #0284c7; color: #0f172a; }
-        .feat-2 { background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-left: 6px solid #db2777; color: #0f172a; }
-        .feat-3 { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border-left: 6px solid #9333ea; color: #0f172a; }
-        .feat-4 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-left: 6px solid #16a34a; color: #0f172a; }
 
         .filter-buttons {
             display: flex;
@@ -261,12 +306,12 @@
             margin: 45px 0 25px;
             padding: 12px 24px;
             border-radius: 12px;
-            color: white;
+            color: var(--group-title-text);
             font-weight: 800;
         }
-        .group-north { background: #0891b2; }
-        .group-south { background: #1d4ed8; }
-        .group-warm  { background: #be123c; }
+        .group-north { background: var(--group-north-bg); }
+        .group-south { background: var(--group-south-bg); }
+        .group-warm  { background: var(--group-warm-bg); }
 
         .grid-atlas {
             display: grid;
@@ -275,13 +320,19 @@
             margin-bottom: 45px;
         }
         .atlas-card {
-            background: var(--card-white);
+            background: var(--card-bg); 
             border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 8px 25px var(--shadow);
-            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08); /* Zvýrazněný stín kartiček */
+            border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
+        }
+
+        /* Jemné zvednutí kartičky při najetí myší pro lepší vizuální efekt */
+        .atlas-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
 
         .card-visual-img {
@@ -298,7 +349,7 @@
         }
 
         .card-body { padding: 30px; flex-grow: 1; }
-        .card-body h3 { font-size: 1.5rem; margin-bottom: 8px; }
+        .card-body h3 { font-size: 1.5rem; margin-bottom: 8px; color: var(--species-title); }
         .card-body .latinsky { font-style: italic; color: var(--text-muted); font-size: 1.05rem; margin-bottom: 14px; }
         .card-body p { font-size: 1.15rem; }
 
@@ -318,13 +369,13 @@
             .grid-atlas { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         }
 
-        /* Extrémní oprava pro mobilní telefony - Už žádný goofy vzhled! */
+        /* Extrémní oprava pro mobilní telefony */
         @media (max-width: 768px) {
             html { 
-                font-size: 12px; /* Výraznější zmenšení textu, aby se správně skládal */
+                font-size: 12px; 
             }
             .container {
-                padding: 10px 15px; /* Menší okraje kolem celého webu */
+                padding: 10px 15px; 
             }
             .hero {
                 padding: 130px 15px 40px;
@@ -343,7 +394,7 @@
                 margin-bottom: 20px;
             }
             .web-section { 
-                padding: 25px 15px; /* Kompaktní rámečky pro úsporu místa */
+                padding: 25px 15px; 
                 margin-bottom: 25px;
                 border-radius: 16px;
             }
@@ -388,18 +439,18 @@
                 padding: 8px 16px;
             }
             .grid-atlas { 
-                grid-template-columns: 1fr; /* Kartičky v jedné čisté řadě pod sebou */
+                grid-template-columns: 1fr; 
                 gap: 20px;
             }
             .atlas-card {
-                width: 100%; /* Karta zabere přesně šířku displeje */
+                width: 100%; 
             }
             .card-visual-img {
-                height: 180px; /* Přiměřená výška obrázku na mobilu */
+                height: 180px; 
                 width: 100%;
             }
             .card-visual-img img {
-                width: 100% !important; /* Striktní vynucení šířky pro obrázek */
+                width: 100% !important; 
                 max-width: 100%;
             }
             .card-body {
@@ -436,11 +487,7 @@
                 font-size: 0.95rem;
             }
         }
-    </style>
-</head>
-<body>
-
-    <a href="#main-content" class="skip-link">Přeskočit na obsah</a>
+    </style></head><body>
 
     <nav aria-label="Hlavní navigace">
         <div class="nav-container">
@@ -449,14 +496,14 @@
                 <li><a href="#zajimavosti">Zajímavosti</a></li>
                 <li><a href="#atlas">Atlas</a></li>
             </ul>
-            <button class="theme-toggle" id="themeBtn" aria-label="Přepnout tmavý režim" aria-live="polite">Tmavý režim</button>
+            <button class="theme-toggle" id="themeBtn" aria-label="Přepnout režim vzhledu" aria-live="polite">☀️ Světlý režim</button>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-emoji" aria-hidden="true">🦭</div>
-        <h1>Svět tuleňů online</h1>
-        <p>Kompletní vědecký portál splňující standardy moderního, rychlého a přístupného webu.</p>
+        <h1>Svět tuleňů</h1>
+        <p>Komplexní průvodce anatomií, chováním a přirozeným prostředím tuleňů z celého světa.</p>
     </header>
 
     <main class="container" id="main-content">
@@ -474,19 +521,19 @@
         <section id="zajimavosti" class="web-section" aria-labelledby="title-facts">
             <h2 id="title-facts" class="section-title">Pozoruhodné mechanismy přežití</h2>
             <div class="features-grid">
-                <div class="feature-item feat-1">
+                <div class="feature-item">
                     <h3>Jak funguje fyziologie ponoru?</h3>
                     <p>Při potápění dokáží tuleni reflexivně snížit svou srdeční frekvenci na pouhých 10 % běžného stavu, díky čemuž ušetří kyslík na extrémně dlouhé ponory.</p>
                 </div>
-                <div class="feature-item feat-2">
+                <div class="feature-item">
                     <h3>K čemu slouží citlivé vibrisy?</h3>
                     <p>Hmatové vousy na čumáku dokáží zachytit jemné hydrodynamické stopy plovoucí ryby i v naprosté tmě hlubokého oceánu.</p>
                 </div>
-                <div class="feature-item feat-3">
+                <div class="feature-item">
                     <h3>Jak tuleně izoluje podkožní tuk?</h3>
                     <p>Před mrazem v polárních oblastech je spolehlivě chrání silná vrstva podkožního tuku (tran), která dosahuje tloušťky až 10 cm.</p>
                 </div>
-                <div class="feature-item feat-4">
+                <div class="feature-item">
                     <h3>Může tuleň spát hluboko pod vodou?</h3>
                     <p>Ano, tuleni dokáží spát pod vodou. Jejich tělo automaticky a bez plného probuzení vyplave na hladinu pro nádech.</p>
                 </div>
@@ -669,29 +716,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Správa Tmavého / Světlého vzhledu
             const themeBtn = document.getElementById('themeBtn');
             const currentTheme = localStorage.getItem('theme') || 'light';
             
             if (currentTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                themeBtn.textContent = 'Světelný režim';
+                themeBtn.textContent = '🌙 Tmavý režim';
+            } else {
+                themeBtn.textContent = '☀️ Světlý režim';
             }
 
             themeBtn.addEventListener('click', () => {
                 let theme = document.documentElement.getAttribute('data-theme');
+                
                 if (theme === 'dark') {
                     document.documentElement.removeAttribute('data-theme');
                     localStorage.setItem('theme', 'light');
-                    themeBtn.textContent = 'Tmavý režim';
+                    themeBtn.textContent = '☀️ Světlý režim';
                 } else {
                     document.documentElement.setAttribute('data-theme', 'dark');
                     localStorage.setItem('theme', 'dark');
-                    themeBtn.textContent = 'Světelný režim';
+                    themeBtn.textContent = '🌙 Tmavý režim';
                 }
             });
 
-            // Přístupné a interaktivní filtrování atlasu
+            // OPRAVENÉ, DOKONČENÉ A FUNKČNÍ FILTROVÁNÍ ATLASU
             const filterButtons = document.querySelectorAll('.filter-btn');
             const groups = document.querySelectorAll('.atlas-group');
 
