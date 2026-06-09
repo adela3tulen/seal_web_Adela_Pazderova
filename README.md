@@ -21,8 +21,12 @@
 ## Adresářová struktura
 ```text
 seal_web_Adela_Pazderova/
-├── index.html            # Hlavní a jediný sémantický dokument webu
-├── README.md             # Kompletní dokumentace projektu (tento soubor)
+├── 📄 index.html        (Hlavní HTML kód stránky)
+├── 📄 style.css         (Čistý CSS kód pro vzhled a responzivitu)
+├── 📄 script.js        (Čistý JavaScript pro přepínání režimů a filtry)
+├── 📄 README.md         (Dokumentace s návodem)
+├── 📄 robots.txt        (Instrukce pro vyhledávače, co mohou indexovat)
+├── 📄 sitemap.xml       (Mapa webu pro vyhledávače)
 └── tuleni/               # Adresář s optimalizovanými obrazovými materiály
     ├── tulen-obecny.webp
     ├── tulen-gronsky.jpg
