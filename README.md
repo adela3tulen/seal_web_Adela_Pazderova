@@ -72,7 +72,7 @@ Vysvětlení: Atribut loading="lazy" zajišťuje, že prohlížeč stahuje obrá
 }
 </script>
 ```
-### 3. Přístupnost
+### Přístupnost
 Výstřižek kódu:
 
 ```HTML
@@ -85,7 +85,7 @@ btn.setAttribute('aria-pressed', 'true');
 ```
 Vysvětlení: Návrh plně reflektuje standardy WCAG 2.1. Barevný kontrast textu vůči pozadí dosahuje vysokého poměru ve světlém i tmavém režimu. Web je plně ovladatelný vestavěnou klávesnicí (logický pohyb pomocí Tab, vizuální focus stavy). Pro asistivní technologie (čtečky obrazovky) jsou tlačítka filtru osazena dynamickým atributem aria-pressed, který okamžitě oznamuje stav filtru.
 
-### 4. Sociální sítě (Social Snippets)
+### Sociální sítě (Social Snippets)
 Teoretický popis řešení: Při sdílení odkazu na sociálních sítích platformy vyhledávají specifické metaznačky v záhlaví webu. Tyto protokoly promění prostý textový odkaz na vizuálně atraktivní náhledovou kartu s obrázkem a popiskem. K tomuto účelu slouží Open Graph protokol a specifikace X Cards.
 
 Výstřižek kódu:
@@ -98,7 +98,7 @@ Výstřižek kódu:
 ```
 Vysvětlení: Značky og:title a og:image určují přesný nadpis a hlavní obrázek, který se automaticky vykreslí v příspěvku na Facebooku nebo LinkedInu. Pravidlo twitter:card s hodnotou summary_large_image vygeneruje na síti X moderní zobrazení s velkým obrázkem.
 
-### 5. UI/UX a Responzivní design
+### UI/UX a Responzivní design
 Teoretický popis řešení: Správná vizuální hierarchie vyžaduje, aby se web přizpůsobil velikosti displeje. Na úzkých obrazovkách mobilních telefonů způsobuje fixní velikost písma a velké okraje vertikální deformaci a přetékání obrázků. Řešením je responzivní typografie postavená na změně velikosti kořenového písma (html) za použití relativních jednotek rem v kombinaci s flexibilním gridem.
 
 Výstřižek kódu:
@@ -115,7 +115,7 @@ Výstřižek kódu:
 ```
 Vysvětlení: Uvnitř Media Query pro mobily jsme snížili základní font na 14px, čímž se automaticky zmenšily texty definované v rem. Grid se přeskládal do jednoho sloupce (1fr), takže karty mají přirozenou výšku. Pravidlo width: 100% !important striktně drží obrázky uvnitř bílého pozadí karet a zabraňuje jejich přetékání do stran.
 
-### 6. AI Integrace
+### AI Integrace
 Teoretický popis řešení: Vývoj moderních webových rozhraní efektivně využívá umělou inteligenci jako partnera pro refaktorizaci kódu, generování sémantických textů na základě reálných biologických dat a pro odhalování skrytých chyb v responzivitě (tzv. layout overflow).
 
 Ukázka promptu z vývoje:
