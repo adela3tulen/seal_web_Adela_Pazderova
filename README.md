@@ -33,7 +33,7 @@ seal_web_Adela_Pazderova/
     ├── tulen-krouzkovany.webp
     ├── tulen-vousaty.jpg
     ├── tulen-kuzelozubi.jpg
-    ├── paskovany.jpg
+    ├── tulen-paskovany.jpg
     ├── rypous-sloni.jpg
     ├── tulen-pacificky.jpg
     ├── rypous-sloni.webp
@@ -46,7 +46,7 @@ seal_web_Adela_Pazderova/
     ├── tulen-stredomorsky.webp
     └── tulen-havajsky.jpg
 ```
-### 1. Výkon (Performance)
+### Výkon (Performance)
 Teoretický popis řešení: Optimalizace výkonu na straně klienta spočívá v redukci přenášených dat a efektivním plánování síťových požadavků. Pro snížení hodnot LCP (Largest Contentful Paint) a CLS (Cumulative Layout Shift) využíváme moderní úsporné formáty obrázků (.webp), nativní odložené načítání (Lazy Loading) a striktní definici rozměrů přímo v HTML kódu.
 
 Výstřižek kódu:
@@ -58,7 +58,7 @@ Výstřižek kódu:
 ```
 Vysvětlení: Atribut loading="lazy" zajišťuje, že prohlížeč stahuje obrázek až ve chvíli, kdy se k němu uživatel při posouvání stránky přiblíží. Atributy width="320" a height="220" definují přesný poměr stran. Prohlížeč tak pro fotku rezervuje místo předem a text po načtení obrázku "neodskočí" dolů.
 
-### 2. SEO
+### SEO
 * **Teoretický popis řešení:** Moderní vyhledávače hodnotí weby na základě sémantické čistoty kódu a přítomnosti strukturovaných dat. Namísto generických divů jsou použity specifické HTML5 značky. Pro vyhledávací roboty jsou navíc implementována strukturovaná data ve formátu JSON-LD (Schema.org), která umožňují zařadit web do bohatých výsledků vyhledávání (*Rich Snippets*).
 * **Výstřižek kódu:**
 
@@ -73,16 +73,17 @@ Vysvětlení: Atribut loading="lazy" zajišťuje, že prohlížeč stahuje obrá
 </script>
 ```
 ### 3. Přístupnost
-Teoretický popis řešení: Web musí být plně přístupný a ovladatelný pro lidi se zrakovým či motorickým znevýhodněním, kteří používají hlasové čtečky obrazovky nebo se po webu pohybují výhradně pomocí klávesnice. Standardy WCAG 2.1 vyžadují jasně deklarované stavy interaktivních prvků (ARIA atributy) a možnost přeskočit dlouhá menu.
-
 Výstřižek kódu:
 
 ```HTML
-<a href="#main-content" class="skip-link">Přeskočit na obsah</a>
-
-<button class="filter-btn active" data-filter="all" aria-pressed="true">Všechny druhy</button>
+filterButtons.forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false'); 
+});
+btn.classList.add('active');
+btn.setAttribute('aria-pressed', 'true');
 ```
-Vysvětlení: Odkaz s třídou .skip-link je pro běžného uživatele skrytý, ale uživatel s klávesnicí (stisknutím klávesy Tab) ho uvidí jako první prvek a může přeskočit celé navigační menu. Atribut aria-pressed="true" u tlačítek předává čtečce informaci o tom, který filtr je aktuálně zapnutý.
+Vysvětlení: Návrh plně reflektuje standardy WCAG 2.1. Barevný kontrast textu vůči pozadí dosahuje vysokého poměru ve světlém i tmavém režimu. Web je plně ovladatelný vestavěnou klávesnicí (logický pohyb pomocí Tab, vizuální focus stavy). Pro asistivní technologie (čtečky obrazovky) jsou tlačítka filtru osazena dynamickým atributem aria-pressed, který okamžitě oznamuje stav filtru.
 
 ### 4. Sociální sítě (Social Snippets)
 Teoretický popis řešení: Při sdílení odkazu na sociálních sítích platformy vyhledávají specifické metaznačky v záhlaví webu. Tyto protokoly promění prostý textový odkaz na vizuálně atraktivní náhledovou kartu s obrázkem a popiskem. K tomuto účelu slouží Open Graph protokol a specifikace X Cards.
@@ -122,3 +123,26 @@ Ukázka promptu z vývoje:
 „Obrázky v mé gridové struktuře atlasu na mobilu přetékají mimo bílé pozadí karet a texty se vertikálně natahují do dlouhých nudlí. Navrhni čisté řešení pomocí CSS proměnných, jednotek rem a object-fit pro reset mobilního zobrazení.“
 
 Vysvětlení: Integrace AI spočívala v aktivním code-review. Na základě výše uvedeného promptu umělá inteligence odhalila nevhodné chování pevných šířek na mobilních zařízeních a vygenerovala čistý responzivní CSS kód, který sjednotil vzhled celého webu bez nutnosti nasazování těžkých JavaScriptových knihoven.
+
+### robots.txt
+
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://adela3tulen.github.io/seal_web_Adela_Pazderova/sitemap.xml
+```
+
+### sitemap.xml
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://adela3tulen.github.io/seal_web_Adela_Pazderova/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+```
